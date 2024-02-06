@@ -5,11 +5,12 @@ import { useState } from "react";
 
 function Fields(){
     
-    const [currField,setCurrField] = useState("FilesIcon");
+    const [currField,setCurrField] = useState("init");
+    const [status,toggleStatus] = useState(false);
     return (
         <div className="Fields SBItem">
-            <IconMenu setCurrField={setCurrField}/>
-            <FieldArea currField={currField}/>
+            <IconMenu currField={currField} setCurrField={setCurrField} toggleStatus={toggleStatus} status={status}/>
+            {status && <FieldArea currField={currField}/>}
         </div>
     )
 }

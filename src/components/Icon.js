@@ -1,11 +1,16 @@
-function Icon({name,setCurrField}){
+function Icon({ currField, name, setCurrField, toggleStatus, status }) {
     return (
-        <div class="Icon">
-            <button onClick={()=>setCurrField(name)}>
+        <div className="Icon">
+            <button onClick={() => {
+                if (currField === name || currField==="init") {
+                    toggleStatus(!status);
+                } 
+                setCurrField(name);
+            }}>
                 {name}
             </button>
         </div>
-    )
+    );
 }
 
-export  default Icon;
+export default Icon;

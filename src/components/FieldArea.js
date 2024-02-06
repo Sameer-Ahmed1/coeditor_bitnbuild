@@ -1,7 +1,11 @@
-function FieldArea(props){
-    return <div className="FieldArea FItem">
-        {props.currField}
-    </div>
+import FilesTab from "../FieldComponents/FilesTab";
+import SearchBar from "../FieldComponents/SearchBar";
+
+function FieldArea({currField}){
+    return (<>
+        {currField==="SearchBar" && <SearchBar />}
+        {currField==="FilesTab" && <FilesTab />}
+    </>)
 }
 
 export default FieldArea;

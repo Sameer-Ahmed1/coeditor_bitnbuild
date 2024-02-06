@@ -1,9 +1,8 @@
 import Icon from "./Icon"
-function IconMenu({setCurrField}){
+function IconMenu({currField,setCurrField,toggleStatus,status}){
     return <div className="IconMenu FItem">
-        <Icon name="FilesIcon" setCurrField={setCurrField}/>
-        <Icon name="RoomsIcom" setCurrField={setCurrField}/>
-        <Icon name="ChatBotIcon" setCurrField={setCurrField}/>
+        <Icon name="FilesTab" currField={currField} setCurrField={setCurrField} toggleStatus={toggleStatus} status={status}/>
+        <Icon name="SearchBar" currField={currField} setCurrField={setCurrField} toggleStatus={toggleStatus} status={status}/>
     </div>
 }
 
