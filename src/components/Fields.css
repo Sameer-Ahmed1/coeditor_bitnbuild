@@ -11,9 +11,11 @@
 
 
 .IconMenu{
-    background-color: aqua;
-    min-width: 100px;
+    background-color: 	#0065a9;
+    width:80px;
 }
+
+
 .FieldArea{
     background-color: aquamarine;
     min-width: 250px;
