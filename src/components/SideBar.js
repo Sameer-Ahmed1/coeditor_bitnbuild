@@ -1,12 +1,11 @@
-import IconMenu from "./IconMenu";
-import FieldArea from "./FieldArea";
+import Intro from "./Intro"
+import Fields from "./Fields";
 import "./SideBar.css"
 
 function SideBar() {
     return <div className="SideBar">
-        SideBar
-        <IconMenu className="item"/>
-        <FieldArea className="item"/>
+        <Intro />
+        <Fields />
     </div>;
 }
   

@@ -1,8 +1,3 @@
 .App{
     display: flex;
-    flex-direction: column;
-}
-
-.SideBar{
-    background-color: wheat;
 }

@@ -1,6 +1,6 @@
-function FieldArea(){
-    return <div className="FieldArea">
-        FieldArea
+function FieldArea(props){
+    return <div className="FieldArea FItem">
+        {props.currField}
     </div>
 }
 

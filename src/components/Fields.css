@@ -1,0 +1,20 @@
+/* .FItem{
+    background-color: blue;
+} */
+
+.Fields{
+    height: inherit;
+    /* background-color: blue; */
+
+    display: flex;
+}
+
+
+.IconMenu{
+    background-color: aqua;
+    min-width: 100px;
+}
+.FieldArea{
+    background-color: aquamarine;
+    min-width: 250px;
+}

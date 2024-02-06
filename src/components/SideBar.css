@@ -1,3 +1,25 @@
-.item{
+/* .item{
     background-color: lightblue;
+} */
+
+
+.SideBar{
+    background-color: wheat;
+    display: flex;
+    flex-direction: column;
+    height: 95vh;
+}
+
+/* .SBItem{
+    background-color: yellow;
+} */
+
+.Intro{
+    background-color: yellow;
+    min-height: 40px;
+    min-width: 200px;
+    font-size: larger;
+
+    text-align: center;
+    line-height: 40px;
 }

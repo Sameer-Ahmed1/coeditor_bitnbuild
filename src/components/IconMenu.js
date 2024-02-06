@@ -1,6 +1,9 @@
-function IconMenu(){
-    return <div className="IconMenu">
-        Icon Menu
+import Icon from "./Icon"
+function IconMenu({setCurrField}){
+    return <div className="IconMenu FItem">
+        <Icon name="FilesIcon" setCurrField={setCurrField}/>
+        <Icon name="RoomsIcom" setCurrField={setCurrField}/>
+        <Icon name="ChatBotIcon" setCurrField={setCurrField}/>
     </div>
 }
 
