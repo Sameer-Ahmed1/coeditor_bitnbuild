@@ -1,3 +1,33 @@
-.App{
-    display: flex;
+.App {
+  display: flex;
 }
+
+.iconBtn {
+  margin: 10px;
+  border: none;
+  outline: none;
+  color: white;
+  background: none;
+  font-size: 50px;
+  cursor: pointer;
+  align-items: center;
+  position: relative;
+}
+.iconBtn::after {
+  content: "";
+  width: 4px;
+  height: 0px;
+  background: #021c31;
+  position: absolute;
+  left: -6px;
+  bottom: 0px;
+  transition: 0.7s;
+}
+
+.iconBtn:hover::after {
+  height: 100%;
+}
+.iconBtn:hover {
+  color: #021c31;
+}
+/* <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&family=Nunito+Sans:opsz@6..12&display=swap" rel="stylesheet"> */
