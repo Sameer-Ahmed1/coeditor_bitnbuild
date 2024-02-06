@@ -6,4 +6,4 @@ function IconMenu({currField,setCurrField,toggleStatus,status}){
     </div>
 }
 
-export default IconMenu;
+export default IconMenu; 
