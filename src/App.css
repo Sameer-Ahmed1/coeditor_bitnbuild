@@ -83,3 +83,7 @@
 .ChatBox {
   outline: 2px solid yellow;
 }
+
+body{
+  padding: 0;
+}
