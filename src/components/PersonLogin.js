@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import './PersonLogin.css'
 function PersonLogin({ onPersonLogin, setCurrPerson, persons, setCurrRoom, setInRoom, rooms }) {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
@@ -67,28 +67,37 @@ function PersonLogin({ onPersonLogin, setCurrPerson, persons, setCurrRoom, setIn
   };
 
   return (
-    <div className="person-login">
-      <h2>{showSignIn ? 'Person Sign In' : 'Person Login'}</h2>
-      <div>
-        <label htmlFor="name">Name:</label>
-        <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} />
+    <div className="body">
+      <div className="person-login">
+        <h2 className='login-heading'>{showSignIn ? 'Person Sign In' : 'Person Login'}</h2>
       </div>
-      <div>
-        <label htmlFor="password">Password:</label>
-        <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+      <div className="card">
+        <table className='input-items'>
+          <tbody>
+            <tr>
+              <td>Username:</td>
+              <td><input className='input-style' type="text" placeholder='Enter Username' id="name" value={name} onChange={(e) => setName(e.target.value)} /></td>
+            </tr>
+            <tr>
+              <td>Password:</td>
+              <td><input className='input-style' type="password" placeholder='Enter Password' id="password" value={password} onChange={(e) => setPassword(e.target.value)} /></td>
+            </tr>
+            {showSignIn && (
+              <tr>
+                <td>Confirm Password:</td>
+                <td><input className='input-style' type="password" placeholder='Confirm Password' id="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} /></td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+        <button className='btn login-btn' onClick={showSignIn ? handleSignIn : handleLogin}>{showSignIn ? 'Sign In' : 'Login'}</button>
+        <button className='btn new-user-btn' onClick={() => setShowSignIn(!showSignIn)}>
+          {showSignIn ? 'Switch to Login' : 'Sign In Instead?'}
+        </button> 
       </div>
-      {showSignIn && (
-        <div>
-          <label htmlFor="confirmPassword">Confirm Password:</label>
-          <input type="password" id="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
-        </div>
-      )}
-      <button onClick={showSignIn ? handleSignIn : handleLogin}>{showSignIn ? 'Sign In' : 'Login'}</button>
-      <button onClick={() => setShowSignIn(!showSignIn)}>
-        {showSignIn ? 'Switch to Login' : 'Sign In Instead?'}
-      </button>
     </div>
   );
+  
 }
 
 export default PersonLogin;
