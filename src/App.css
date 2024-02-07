@@ -81,11 +81,6 @@
   /* Ensure relative positioning for absolute positioning within */
 }
 
-.Content {
-  position: relative;
-  /* Ensure relative positioning for absolute positioning within */
-}
-
 .ChatBoxButton {
   position: absolute;
   bottom: 20px;
@@ -106,7 +101,6 @@
   background-color: #0056b3;
   /* Darker shade for hover effect */
 }
-
 
 
 body {
