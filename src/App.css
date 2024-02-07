@@ -76,39 +76,38 @@
   /* MainEditor expands to fill remaining space */
 }
 
+.Content {
+  position: relative;
+  /* Ensure relative positioning for absolute positioning within */
+}
+
+.Content {
+  position: relative;
+  /* Ensure relative positioning for absolute positioning within */
+}
+
 .ChatBoxButton {
   position: absolute;
-  /* Position the button absolutely within Coeditor */
-  bottom: 0;
-  /* Align button to bottom */
-  right: 0;
-  /* Align button to left */
+  bottom: 20px;
+  /* Adjust this value as needed */
+  right: 20px;
+  /* Adjust this value as needed */
   z-index: 1;
-  /* Ensure the button stays above ChatBox */
+  background-color: #007bff;
+  /* Example background color */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-.ChatBox {
-  position: absolute;
-  /* Position ChatBox absolutely */
-  top: 0;
-  /* Align ChatBox to top */
-  right: 0;
-  /* Align ChatBox to right */
-  width: 300px;
-  /* Set width of ChatBox */
-  height: 100%;
-  /* Make ChatBox full height */
-  background-color: lightblue;
-  /* Optional: Add background color */
-  border-left: 1px solid #ddd;
-  /* Optional: Add border between ChatBox and MainEditor */
-  z-index: 0;
-  /* Ensure ChatBox stays behind other content */
+.ChatBoxButton:hover {
+  background-color: #0056b3;
+  /* Darker shade for hover effect */
 }
 
-.ChatBox {
-  outline: 2px solid yellow;
-}
+
 
 body {
   padding: 0;
