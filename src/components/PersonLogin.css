@@ -1,0 +1,70 @@
+
+.body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #1e1e1e; 
+    color: #fff; 
+    font-family: Arial, sans-serif;
+}
+
+/* .left-side img {
+    max-width: 100%;
+    height: auto;
+    max-height: 300px; 
+    margin-right: 20px;
+} */
+
+.card {
+    background-color: #333; 
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+}
+.card:hover{
+    box-shadow:8px 8px rgba(32, 24, 24, 0.1); ;
+}
+.input-items {
+    width: 100%;
+}
+
+.input-items td {
+    padding: 10px 0;
+}
+
+.input-style {
+    width: calc(100% - 20px);
+    padding: 8px;
+    border: 1px solid #555; 
+    border-radius: 4px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #444;
+}
+
+.btn {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    background-color: #007bff; 
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.new-user-btn {
+    background-color: #28a745; /* Green color for Create New User button */
+}
+
+.new-user-btn:hover {
+    background-color: #218838; /* Darker green on hover */
+}
