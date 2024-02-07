@@ -1,14 +1,19 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 .App {
   display: flex;
 }
 
 .iconBtn {
-  margin: 10px;
+  margin: 18px;
   border: none;
   outline: none;
   color: white;
   background: none;
-  font-size: 50px;
+  font-size: 40px;
   cursor: pointer;
   align-items: center;
   position: relative;

@@ -9,14 +9,12 @@
     display: flex;
 }
 
-
 .IconMenu{
     background-color: 	#0065a9;
     width:80px;
 }
 
-
 .FieldArea{
-    background-color: 1e1e1e;
+    /* background-color: 1e1e1e; */
     min-width: 250px;
 }

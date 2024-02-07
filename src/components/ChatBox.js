@@ -1,3 +1,4 @@
+import "./chatBox.css"
 function ChatBox(){
     return (<div className="ChatBox">
         ChatBox component

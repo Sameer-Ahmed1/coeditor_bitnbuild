@@ -1,7 +1,7 @@
 function Intro(){
     return (
         <div className="Intro SBItem">
-            Navigate
+            EXPLORER
         </div>
     )
 }
