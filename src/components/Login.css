@@ -1,0 +1,54 @@
+.login-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    background-color: #f0f0f0; /* Light gray background */
+    padding: 20px;
+    height: 90vh; /* Full height */
+    width: 100%;
+}
+
+.sign-in-box,
+.create-room-box {
+    width: 45%;
+    background-color: #ffe4e1; /* Light pink background */
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.create-room-box {
+    align-self: flex-end; /* Align to the end of the container */
+}
+
+.sign-in-box h2,
+.create-room-box h2 {
+    margin-bottom: 10px;
+}
+
+.sign-in-box input,
+.create-room-box input {
+    width: calc(100% - 20px); /* Adjusted width */
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.sign-in-box button,
+.create-room-box button,
+.choose-no-room-button {
+    width: 100px;
+    padding: 10px;
+    background-color: #007bff; /* Blue button */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.sign-in-box {
+    margin-bottom: 10px; /* Reduce margin */
+}

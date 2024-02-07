@@ -1,0 +1,26 @@
+.NavBar {
+    background-color: #333; /* Background color of the navbar */
+    color: white; /* Text color */
+    display: flex;
+    justify-content: space-between; /* To push the title and log button to opposite ends */
+    align-items: center; /* To vertically center the content */
+    padding: 10px 20px; /* Padding for better appearance */
+}
+
+.title {
+    font-size: 24px; /* Font size for the title */
+    font-weight: bold; /* Bold font for emphasis */
+}
+
+.logButton {
+    background-color: #007bff; /* Background color of the log button */
+    color: white; /* Text color */
+    border: none; /* Remove border */
+    padding: 8px 16px; /* Padding for better appearance */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Show pointer cursor on hover */
+}
+
+.logButton:hover {
+    background-color: #0056b3; /* Darker background color on hover */
+}

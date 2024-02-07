@@ -1,3 +1,115 @@
-.disable-input {
-    pointer-events: none;
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.App {
+  display: flex;
+}
+
+.iconBtn {
+  margin: 18px;
+  border: none;
+  outline: none;
+  color: white;
+  background: none;
+  font-size: 40px;
+  cursor: pointer;
+  align-items: center;
+  position: relative;
+}
+
+.iconBtn::after {
+  content: "";
+  width: 4px;
+  height: 0px;
+  background: #021c31;
+  position: absolute;
+  left: -6px;
+  bottom: 0px;
+  transition: 0.7s;
+}
+
+.iconBtn:hover::after {
+  height: 100%;
+}
+
+.iconBtn:hover {
+  color: #021c31;
+}
+
+/* <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&family=Nunito+Sans:opsz@6..12&display=swap" rel="stylesheet"> */
+
+
+
+.App {
+  display: flex;
+  flex-direction: column;
+}
+
+.Content {
+  display: flex;
+  flex: 1;
+  /* This makes .Content container take up remaining space */
+}
+
+.Coeditor {
+  outline: 2px solid red;
+  flex-grow: 1;
+  /* This makes .Coeditor occupy remaining space */
+  /* You can remove width property as flex-grow will handle the width */
+
+  padding: 20px;
+}
+
+.Coeditor {
+  position: relative;
+  /* Setting position relative to enable absolute positioning of ChatBox */
+  display: flex;
+  flex-direction: row;
+  /* Arrange ChatBox and MainEditor side by side */
+}
+
+.MainEditor {
+  flex-grow: 1;
+  /* MainEditor expands to fill remaining space */
+}
+
+.ChatBoxButton {
+  position: absolute;
+  /* Position the button absolutely within Coeditor */
+  bottom: 0;
+  /* Align button to bottom */
+  right: 0;
+  /* Align button to left */
+  z-index: 1;
+  /* Ensure the button stays above ChatBox */
+}
+
+.ChatBox {
+  position: absolute;
+  /* Position ChatBox absolutely */
+  top: 0;
+  /* Align ChatBox to top */
+  right: 0;
+  /* Align ChatBox to right */
+  width: 300px;
+  /* Set width of ChatBox */
+  height: 100%;
+  /* Make ChatBox full height */
+  background-color: lightblue;
+  /* Optional: Add background color */
+  border-left: 1px solid #ddd;
+  /* Optional: Add border between ChatBox and MainEditor */
+  z-index: 0;
+  /* Ensure ChatBox stays behind other content */
+}
+
+.ChatBox {
+  outline: 2px solid yellow;
+}
+
+body {
+  padding: 0;
+}
