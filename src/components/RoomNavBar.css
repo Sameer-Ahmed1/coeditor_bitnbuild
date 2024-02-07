@@ -1,0 +1,74 @@
+.RoomNavBar {
+    background-color: #333; /* Background color of the navbar */
+    color: white; /* Text color */
+    padding: 10px 20px; /* Padding for better appearance */
+    display: flex;
+    justify-content: space-between; /* Space title and buttons */
+    align-items: center; /* Center items vertically */
+}
+
+.title {
+    font-size: 24px; /* Font size for the title */
+}
+
+.buttons {
+    display: flex;
+    gap: 10px; /* Gap between buttons */
+}
+
+.button {
+    background-color: #4CAF50; /* Background color of the buttons */
+    color: white; /* Text color */
+    border: none; /* Remove border */
+    padding: 10px 20px; /* Padding for better appearance */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Show pointer cursor on hover */
+    font-size: 16px; /* Font size */
+    transition: background-color 0.3s ease; /* Smooth transition for background color */
+    animation: none;
+}
+
+.button:hover {
+    background-color: #45a049; /* Darker background color on hover */
+}
+
+.button:active {
+    animation: click 0.3s;
+}
+
+@keyframes click {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.9);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* New styles for RoomNavBar */
+.RoomNavBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.title,
+.buttons {
+    width: 50%;
+    display: flex;
+    align-items: center;
+}
+
+.title {
+    justify-content: flex-start;
+    padding-left: 20px;
+}
+
+.buttons {
+    justify-content: flex-end;
+    padding-right: 20px;
+}
