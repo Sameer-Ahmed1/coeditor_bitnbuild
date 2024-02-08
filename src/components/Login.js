@@ -75,16 +75,16 @@ function Login({ joinRoom, roomId, setRoomId }) {
         </button>
         {/* <div className="error-login">{error}</div> Display error message */}
       </div>
-      {/* <div className="create-room-box">
-                <h2>Create New Room</h2>
-                <input
-                    type="text"
-                    placeholder="Enter Room Name"
-                    value={newRoomName}
-                    onChange={(e) => setNewRoomName(e.target.value)}
-                />
-                <button className='button-lgn' onClick={handleCreateRoom}>Create</button>
-            </div> */}
+      <div className="create-room-box">
+        <h2>Create New Room</h2>
+        <input
+          type="text"
+          placeholder="Enter Room Name"
+          // value={newRoomName}
+          // onChange={(e) => setNewRoomName(e.target.value)}
+        />
+        <button className="button-lgn">Create</button>
+      </div>
       {/* <button className="button-lgn" onClick={() => setInRoom(true)}> */}
       {/* Choose No Room */}
       {/* </button> */}

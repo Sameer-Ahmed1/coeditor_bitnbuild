@@ -61,6 +61,7 @@ function App() {
     if (socket == null) return;
     socket.emit("leave", roomId);
     setRoomId(""); // Clear the room ID
+    setInRoom(false);
   };
 
   /****************************************************** */
