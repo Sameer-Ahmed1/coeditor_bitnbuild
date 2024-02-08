@@ -74,14 +74,14 @@ function PersonLogin({
   };
 
   return (
-    <div class="flex-container">
+    <div className="flex-container">
       <img src={require("../images/codeImg.png")} alt="" />
-      <div class="content-container">
-        <div class="form-container">
+      <div className="content-container">
+        <div className="form-container">
           <h1>Login</h1>
           <br />
           <br />
-          <span class="subtitle">USERNAME:</span>
+          <span className="subtitle">USERNAME:</span>
           <br />
           <input
             className="input-style"
@@ -92,7 +92,7 @@ function PersonLogin({
             onChange={(e) => setName(e.target.value)}
           />
           <br />
-          <span class="subtitle">PASSWORD:</span>
+          <span className="subtitle">PASSWORD:</span>
           <br />
           <input
             className="input-style"

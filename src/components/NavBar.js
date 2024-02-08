@@ -5,7 +5,6 @@ function NavBar() {
     return (
         <div className="NavBar">
             <div className="title">Coeditor</div>
-            <button className="logButton">Login</button>
         </div>
     );
 }

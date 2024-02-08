@@ -39,7 +39,7 @@ function App() {
 
   return (
     <div className="App">
-      {loginStatus ? (inRoom ? <RoomNavBar /> : <NavBar />) : null}
+      {loginStatus ? (inRoom ? <RoomNavBar /> : <NavBar />) : <NavBar />}
 
       <div className="Content">
         {loginStatus ? (
