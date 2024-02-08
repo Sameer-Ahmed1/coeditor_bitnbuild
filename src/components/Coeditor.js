@@ -1,59 +1,65 @@
 import { Editor } from "@monaco-editor/react";
 import { useEffect, useState } from "react";
-import socketIOClient from "socket.io-client";
-import "./Coeditor.css"
-const ENDPOINT = "http://localhost:4001";
+// import socketIOClient from "socket.io-client";
+import "./Coeditor.css";
+// const ENDPOINT = "http://localhost:4001";
 
-export default function Coeditor() {
-  const DEFAULT_CODE = "// write your code here";
-  const DEFAULT_FILE_NAME = "script.js";
-
-  const [socket, setSocket] = useState(null);
-  const [files, setFiles] = useState({
-    [DEFAULT_FILE_NAME]: DEFAULT_CODE,
-  });
+export default function Coeditor({
+  handleCodeChange,
+  files,
+  activeFile,
+  DEFAULT_CODE,
+  DEFAULT_FILE_NAME,
+}) {
   const [isReadOnly, setIsReadOnly] = useState(false);
-  const [roomId, setRoomId] = useState("");
-  const [activeFile, setActiveFile] = useState("script.js");
+  // const DEFAULT_CODE = "// write your code here";
+  // const DEFAULT_FILE_NAME = "script.js";
 
-  useEffect(() => {
-    const newSocket = socketIOClient(ENDPOINT);
-    setSocket(newSocket);
+  // const [socket, setSocket] = useState(null);
+  // const [files, setFiles] = useState({
+  //   [DEFAULT_FILE_NAME]: DEFAULT_CODE,
+  // });
+  // const [roomId, setRoomId] = useState("");
+  // const [activeFile, setActiveFile] = useState("script.js");
 
-    return () => {
-      newSocket.disconnect();
-    };
-  }, []);
+  // useEffect(() => {
+  //   const newSocket = socketIOClient(ENDPOINT);
+  //   setSocket(newSocket);
 
-  useEffect(() => {
-    if (socket == null) return;
-    socket.on("code", ({ fileName, newCode }) => {
-      setFiles((oldFiles) => ({
-        ...oldFiles,
-        [fileName]: newCode,
-      }));
-    });
-  }, [socket]);
+  //   return () => {
+  //     newSocket.disconnect();
+  //   };
+  // }, []);
 
-  const handleCodeChange = (newCode) => {
-    setFiles((oldFiles) => ({
-      ...oldFiles,
-      [activeFile]: newCode,
-    }));
-    if (socket) {
-      socket.emit("code", { roomId: roomId, fileName: activeFile, newCode });
-    }
-  };
+  // useEffect(() => {
+  //   if (socket == null) return;
+  //   socket.on("code", ({ fileName, newCode }) => {
+  //     setFiles((oldFiles) => ({
+  //       ...oldFiles,
+  //       [fileName]: newCode,
+  //     }));
+  //   });
+  // }, [socket]);
 
-  const joinRoom = () => {
-    if (socket == null) return;
-    socket.emit("join", roomId);
-  };
-  const leaveRoom = () => {
-    if (socket == null) return;
-    socket.emit("leave", roomId);
-    setRoomId(""); // Clear the room ID
-  };
+  // const handleCodeChange = (newCode) => {
+  //   setFiles((oldFiles) => ({
+  //     ...oldFiles,
+  //     [activeFile]: newCode,
+  //   }));
+  //   if (socket) {
+  //     socket.emit("code", { roomId: roomId, fileName: activeFile, newCode });
+  //   }
+  // };
+
+  // const joinRoom = () => {
+  //   if (socket == null) return;
+  //   socket.emit("join", roomId);
+  // };
+  // const leaveRoom = () => {
+  //   if (socket == null) return;
+  //   socket.emit("leave", roomId);
+  //   setRoomId(""); // Clear the room ID
+  // };
 
   const toggleReadOnly = () => {
     setIsReadOnly(!isReadOnly);
@@ -89,15 +95,15 @@ export default function Coeditor() {
       <button onClick={leaveRoom}>Leave Room</button>
       <div className={` ${isReadOnly ? "disable-input" : ""}`}>
         <p>code editor : {activeFile}</p> */}
-        <Editor className="Editor"
-          height="90vh"
-          defaultLanguage="javascript"
-          defaultValue="// some comment"
-          value={files[activeFile]?.toString() || DEFAULT_CODE}
-          onChange={handleCodeChange}
-        />
-      {/* </div>
-      <button onClick={toggleReadOnly}>
+      <Editor
+        className="Editor"
+        height="90vh"
+        defaultLanguage="javascript"
+        defaultValue="// some comment"
+        value={files[activeFile]?.toString() || DEFAULT_CODE}
+        onChange={handleCodeChange}
+      />
+      {/* <button onClick={toggleReadOnly}>
         {isReadOnly ? "Enable Editing" : "Disable Editing"}
       </button> */}
     </div>
