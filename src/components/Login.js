@@ -62,9 +62,10 @@ function Login({ joinRoom, roomId, setRoomId }) {
   return (
     <div className="login-container">
       <div className="sign-in-box">
-        <h2>Sign In to a Room</h2>
+        <h2>Access Room</h2>
         <input
           type="text"
+          className="input-ele"
           placeholder="Enter Room ID"
           value={roomId}
           onChange={(e) => setRoomId(e.target.value)}
@@ -78,7 +79,8 @@ function Login({ joinRoom, roomId, setRoomId }) {
       <div className="create-room-box">
         <h2>Create New Room</h2>
         <input
-          type="text"
+          type="text" 
+          className="input-ele"
           placeholder="Enter Room Name"
           // value={newRoomName}
           // onChange={(e) => setNewRoomName(e.target.value)}

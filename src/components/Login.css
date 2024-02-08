@@ -3,23 +3,31 @@
     flex-direction: row;
     align-items: flex-start;
     justify-content: space-between;
-    background-color: #f0f0f0; /* Light gray background */
+    background-color: #f0f0f0;
     padding: 20px;
-    height: 90vh; /* Full height */
+    height: 90vh; 
     width: 100%;
+    animation: bg-gradient 18s ease infinite;
+    background: linear-gradient(300deg, #1640D6, #00A9FF, #4942E4);
+    background-size: 180% 180%;
 }
+@keyframes bg-gradient 
+{
+  0%{
+    background-position:0% 50% ;
+  }
+  50%{
+    background-position:100% 50% ;
 
-.sign-in-box,
-.create-room-box {
-    width: 45%;
-    background-color: #ffe4e1; /* Light pink background */
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  100%{
+    background-position:0% 50% ;
+
+  }
+  
 }
-
 .create-room-box {
-    align-self: flex-end; /* Align to the end of the container */
+    align-self: flex-end; 
 }
 
 .sign-in-box h2,
@@ -29,26 +37,89 @@
 
 .sign-in-box input,
 .create-room-box input {
-    width: calc(100% - 20px); /* Adjusted width */
+    width: calc(100% - 20px);
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
 
-.sign-in-box button,
+/* .sign-in-box button,
 .create-room-box button,
 .choose-no-room-button {
     width: 100px;
     padding: 10px;
-    background-color: #007bff; /* Blue button */
+    background-color: #007bff;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     margin-top: 10px;
-}
+} */
 
 .sign-in-box {
-    margin-bottom: 10px; /* Reduce margin */
+    margin-bottom: 10px; 
+}
+.sign-in-box,
+.create-room-box {
+    background-color: #E9F6FF;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 2px 2px #0F1035;
+}
+.sign-in-box:hover{
+    box-shadow: none;
+
+}
+.create-room-box:hover{
+    box-shadow: none;
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.input-ele{
+    margin-top: 8px;
+    border: 1px solid #150909;
+}
+.button-lgn {
+    width: 100px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    margin: 30px;
+    width: fit-content;
+    border: 1px solid #007bff;
+    padding: 14px 40px;
+    border-radius: 6px;
+    color: #080441;
+    font-size: 15px;
+    font-weight: 600;
+    background-color: #82ddf4;
+    transition: background 1s;
+}
+button.button-lgn:hover {
+    background: #0056b3;
+    color:white;
+} 
+
+.error-login {
+    color: red;
+    margin-top: 10px;
 }

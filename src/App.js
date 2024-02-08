@@ -81,7 +81,7 @@ function App() {
 
   const [inRoom, setInRoom] = useState(false);
   const [currRoom, setCurrRoom] = useState();
-  const [loginStatus, setLoginStatus] = useState(true);
+  const [loginStatus, setLoginStatus] = useState(false);
   const [currPerson, setCurrPerson] = useState();
   //localStorage.removeItem('currPerson'); -> run this in the console to clear local person
   const [showChatBox, setShowChatBox] = useState(false); // State to manage ChatBox visibility
