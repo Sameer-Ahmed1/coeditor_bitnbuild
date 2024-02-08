@@ -55,7 +55,6 @@
 }
 
 .Coeditor {
-  outline: 2px solid red;
   flex-grow: 1;
   /* This makes .Coeditor occupy remaining space */
   /* You can remove width property as flex-grow will handle the width */
@@ -68,6 +67,7 @@
   /* Setting position relative to enable absolute positioning of ChatBox */
   display: flex;
   flex-direction: row;
+  padding-top: 5px;
   /* Arrange ChatBox and MainEditor side by side */
 }
 
@@ -82,14 +82,11 @@
 }
 
 .ChatBoxButton {
-  position: absolute;
-  bottom: 20px;
-  /* Adjust this value as needed */
-  right: 20px;
-  /* Adjust this value as needed */
-  z-index: 1;
+  position: fixed;
+  bottom: 20px; /* Adjust as needed */
+  right: 40px; /* Adjust as needed */
+  z-index: 1000; /* Ensure it appears on top of other content */
   background-color: #007bff;
-  /* Example background color */
   color: white;
   border: none;
   padding: 10px 20px;
