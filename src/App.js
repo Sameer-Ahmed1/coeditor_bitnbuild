@@ -12,7 +12,10 @@ import userService from "./services/user";
 import Notification from "./components/notification";
 import ErrorMessage from "./components/errorMessage";
 import "./App.css";
-const ENDPOINT = "http://localhost:4001";
+const ENDPOINT =
+  process.env.NODE_ENV === "production"
+    ? process.env.REACT_APP_BASE_URL
+    : "http://localhost:4001";
 
 function App() {
   const [inRoom, setInRoom] = useState(false);
@@ -178,17 +181,12 @@ function App() {
       <ErrorMessage message={error} />
       {loginStatus ? (
         inRoom ? (
-          <RoomNavBar
-            handleLogout={handleLogout}
-            handleLeaveRoom={() => {
-              console.log("leave room");
-            }}
-          />
+          <RoomNavBar handleLogout={handleLogout} handleLeaveRoom={leaveRoom} />
         ) : (
-          <NavBar />
+          <NavBar handleLogout={handleLogout} loginStatus={loginStatus} />
         )
       ) : (
-        <NavBar />
+        <NavBar loginStatus={loginStatus} />
       )}
 
       <div className="Content">
