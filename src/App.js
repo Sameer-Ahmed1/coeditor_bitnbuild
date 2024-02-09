@@ -7,11 +7,29 @@ import PersonLogin from "./components/PersonLogin"; // Import PersonLogin compon
 import { useState, useEffect } from "react";
 import ChatBox from "./components/ChatBox";
 import socketIOClient from "socket.io-client";
-
+import loginService from "./services/login";
+import userService from "./services/user";
+import Notification from "./components/notification";
+import ErrorMessage from "./components/errorMessage";
 import "./App.css";
 const ENDPOINT = "http://localhost:4001";
 
 function App() {
+  const [inRoom, setInRoom] = useState(false);
+  const [loginStatus, setLoginStatus] = useState(false);
+
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem("loggedPhonebookUser");
+    if (loggedUserJSON) {
+      // const user = JSON.parse(loggedUserJSON);
+      // setUser(user);
+      setLoginStatus(true);
+      // If you're using the token in all requests to the server
+      // you can set it in the headers of axios here
+      // axios.defaults.headers.common['Authorization'] = `Bearer ${user.token}`;
+    }
+  }, []);
+
   /********************************socket ******************************* */
   const DEFAULT_CODE = "// write your code here";
   const DEFAULT_FILE_NAME = "script.js";
@@ -65,9 +83,15 @@ function App() {
   };
 
   /****************************************************** */
+  const [signUp, setSignup] = useState(false);
   const [persons, setPersons] = useState([
     { name: "shiva", password: "123", currRoomID: "" },
   ]);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [notification, setnotification] = useState("");
+  const [error, setError] = useState("");
+
   const [rooms, setRooms] = useState([
     {
       id: "test123",
@@ -79,9 +103,7 @@ function App() {
     },
   ]);
 
-  const [inRoom, setInRoom] = useState(false);
   const [currRoom, setCurrRoom] = useState();
-  const [loginStatus, setLoginStatus] = useState(false);
   const [currPerson, setCurrPerson] = useState();
   //localStorage.removeItem('currPerson'); -> run this in the console to clear local person
   const [showChatBox, setShowChatBox] = useState(false); // State to manage ChatBox visibility
@@ -95,19 +117,73 @@ function App() {
     }
   }, []);
 
-  console.log(currRoom, rooms);
+  // console.log(currRoom, rooms);
 
-  const handlePersonLogin = (person) => {
-    //localStorage.setItem('currPerson', JSON.stringify(person));
-    setCurrPerson(person);
-    setLoginStatus(true);
+  const handleLogin = async (event) => {
+    event.preventDefault();
+
+    try {
+      const user = await loginService.login({
+        username,
+        password,
+      });
+
+      window.localStorage.setItem("loggedPhonebookUser", JSON.stringify(user));
+
+      // setUser(user);
+      setUsername("");
+      setPassword("");
+      setLoginStatus(true);
+    } catch (e) {
+      setError(e.response.data.error);
+      setTimeout(() => {
+        setError(null);
+      }, 5000);
+    }
   };
 
+  const handleSignup = async (event) => {
+    event.preventDefault();
+    try {
+      const userCreated = await userService.createUser({
+        username,
+        password,
+      });
+      if (userCreated) {
+        setnotification(`${username} created successfully`);
+        setTimeout(() => {
+          setnotification(null);
+        }, 5000);
+      }
+
+      setUsername("");
+      setPassword("");
+      setSignup(false);
+      // window.location.href = "/";
+    } catch (error) {
+      console.log(error);
+      setError(error.response.data.error);
+      setTimeout(() => {
+        setError(null);
+      }, 5000);
+    }
+  };
+  const handleLogout = () => {
+    window.localStorage.removeItem("loggedPhonebookUser");
+    window.location.reload();
+  };
   return (
     <div className="App">
+      <Notification message={notification} />
+      <ErrorMessage message={error} />
       {loginStatus ? (
         inRoom ? (
-          <RoomNavBar handleLeaveRoom={leaveRoom} />
+          <RoomNavBar
+            handleLogout={handleLogout}
+            handleLeaveRoom={() => {
+              console.log("leave room");
+            }}
+          />
         ) : (
           <NavBar />
         )
@@ -142,12 +218,13 @@ function App() {
           )
         ) : (
           <PersonLogin
-            onPersonLogin={handlePersonLogin}
-            setCurrPerson={setCurrPerson}
-            persons={persons}
-            setCurrRoom={setCurrRoom}
-            setInRoom={setInRoom}
-            rooms={rooms}
+            handleSignIn={handleSignup}
+            signUp={signUp}
+            handleLogin={handleLogin}
+            username={username}
+            password={password}
+            setUsername={setUsername}
+            setPassword={setPassword}
           />
         )}
       </div>
