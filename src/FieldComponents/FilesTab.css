@@ -45,11 +45,11 @@
     justify-content: center;
     background-color: #444;
 }
-
 .fileList {
     display: flex;
     flex-direction: column;
-    padding-right: 10px;
+    max-width: 250px; /* Adjust the maximum width of the file list container as needed */
+    /* overflow: hidden; Hide overflow if filenames exceed the container width */
 }
 
 .fileItem {
@@ -61,8 +61,14 @@
     cursor: pointer; /* Show pointer cursor on hover */
     margin-bottom: 5px; /* Add margin between file items */
     transition: background-color 0.3s ease; /* Smooth transition for background color */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Truncate long filenames */
 }
-
 .fileItem:hover {
     background-color: #444; /* Lighter background color on hover */
+    white-space: normal; /* Allow full filename to be displayed in multiple lines on hover */
+    overflow: visible; /* Show overflowing text */
+    width: auto; /* Allow the width to expand */
 }
+
+
