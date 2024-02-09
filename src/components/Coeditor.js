@@ -1,8 +1,6 @@
 import { Editor } from "@monaco-editor/react";
-import { useEffect, useState } from "react";
-// import socketIOClient from "socket.io-client";
+import { useState } from "react";
 import "./Coeditor.css";
-// const ENDPOINT = "http://localhost:4001";
 
 export default function Coeditor({
   handleCodeChange,
@@ -12,89 +10,40 @@ export default function Coeditor({
   DEFAULT_FILE_NAME,
 }) {
   const [isReadOnly, setIsReadOnly] = useState(false);
-  // const DEFAULT_CODE = "// write your code here";
-  // const DEFAULT_FILE_NAME = "script.js";
+  const [isCardVisible, setIsCardVisible] = useState(false);
+  const [fileContents, setFileContents] = useState("");
 
-  // const [socket, setSocket] = useState(null);
-  // const [files, setFiles] = useState({
-  //   [DEFAULT_FILE_NAME]: DEFAULT_CODE,
-  // });
-  // const [roomId, setRoomId] = useState("");
-  // const [activeFile, setActiveFile] = useState("script.js");
+  const toggleCardVisibility = () => {
+    setIsCardVisible(!isCardVisible);
+  };
 
-  // useEffect(() => {
-  //   const newSocket = socketIOClient(ENDPOINT);
-  //   setSocket(newSocket);
+  const runFile = () => {
+    setFileContents(files[activeFile] || DEFAULT_CODE);
+    toggleCardVisibility();
+  };
 
-  //   return () => {
-  //     newSocket.disconnect();
-  //   };
-  // }, []);
-
-  // useEffect(() => {
-  //   if (socket == null) return;
-  //   socket.on("code", ({ fileName, newCode }) => {
-  //     setFiles((oldFiles) => ({
-  //       ...oldFiles,
-  //       [fileName]: newCode,
-  //     }));
-  //   });
-  // }, [socket]);
-
-  // const handleCodeChange = (newCode) => {
-  //   setFiles((oldFiles) => ({
-  //     ...oldFiles,
-  //     [activeFile]: newCode,
-  //   }));
-  //   if (socket) {
-  //     socket.emit("code", { roomId: roomId, fileName: activeFile, newCode });
-  //   }
-  // };
-
-  // const joinRoom = () => {
-  //   if (socket == null) return;
-  //   socket.emit("join", roomId);
-  // };
-  // const leaveRoom = () => {
-  //   if (socket == null) return;
-  //   socket.emit("leave", roomId);
-  //   setRoomId(""); // Clear the room ID
-  // };
-
-  const toggleReadOnly = () => {
-    setIsReadOnly(!isReadOnly);
+  const closeCard = () => {
+    setIsCardVisible(false);
   };
 
   return (
     <div className="Coeditor">
-      {/* <button
-        disabled={activeFile === "script.js"}
-        onClick={() => setActiveFile("script.js")}
-      >
-        script.js
-      </button>
-      <button
-        disabled={activeFile === "style.css"}
-        onClick={() => setActiveFile("style.css")}
-      >
-        style.css
-      </button>
-      <button
-        disabled={activeFile === "index.html"}
-        onClick={() => setActiveFile("index.html")}
-      >
-        index.html
-      </button>
-      <input
-        type="text"
-        value={roomId}
-        onChange={(e) => setRoomId(e.target.value)}
-        placeholder="Enter room ID"
-      />
-      <button onClick={joinRoom}>Join Room</button>
-      <button onClick={leaveRoom}>Leave Room</button>
-      <div className={` ${isReadOnly ? "disable-input" : ""}`}>
-        <p>code editor : {activeFile}</p> */}
+      <div className="run-button-container">
+        <button onClick={runFile} className="run-button">
+          Run
+        </button>
+      </div>
+      {isCardVisible && <div className={`code-card`}>
+        <div className="input">
+          <input placeholder="Enter input here"/>
+        </div>
+        <div className="output">
+          <pre>{fileContents}</pre>
+        </div>
+        <button onClick={closeCard} className="close-button">
+          Close
+        </button>
+      </div>}
       <Editor
         className="Editor"
         height="90vh"
@@ -103,9 +52,6 @@ export default function Coeditor({
         value={files[activeFile]?.toString() || DEFAULT_CODE}
         onChange={handleCodeChange}
       />
-      {/* <button onClick={toggleReadOnly}>
-        {isReadOnly ? "Enable Editing" : "Disable Editing"}
-      </button> */}
     </div>
   );
 }
