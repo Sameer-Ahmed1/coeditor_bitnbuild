@@ -252,7 +252,7 @@ function App() {
       <ErrorMessage message={error} />
       {loginStatus ? (
         inRoom ? (
-          <RoomNavBar handleLogout={handleLogout} handleLeaveRoom={leaveRoom} />
+          <RoomNavBar roomId={roomId} handleLogout={handleLogout} handleLeaveRoom={leaveRoom} />
         ) : (
           <NavBar handleLogout={handleLogout} loginStatus={loginStatus} />
         )

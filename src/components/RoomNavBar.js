@@ -1,7 +1,7 @@
 import React from "react";
 import "./RoomNavBar.css";
 
-function RoomNavBar({ handleLeaveRoom, handleLogout }) {
+function RoomNavBar({ handleLeaveRoom, handleLogout,roomId }) {
   const handleButtonClick = (buttonName) => {
     console.log(buttonName);
   };
@@ -26,9 +26,9 @@ function RoomNavBar({ handleLeaveRoom, handleLogout }) {
         </a>
       </div>
       <div className="buttons">
-        <button className="button" onClick={() => handleButtonClick("Room id")}>
-          Room id
-        </button>
+        {roomId && <p className="button">
+          Room id {": " + roomId}
+        </p>}
         <button className="button" onClick={handleLogout}>
           Log out
         </button>
@@ -37,12 +37,6 @@ function RoomNavBar({ handleLeaveRoom, handleLogout }) {
           onClick={() => handleButtonClick("Add People")}
         >
           Add People
-        </button>
-        <button
-          className="button"
-          onClick={() => handleButtonClick("Add Room")}
-        >
-          Add Room
         </button>
         <button className="leaveBtn" onClick={handleLeaveRoom}>
           Leave Room

@@ -21,7 +21,6 @@ function FilesTab({ activeFile, setActiveFile }) {
   // Function to handle clicking on a file
   const handleFileClick = (fileName) => {
     setActiveFile(fileName);
-    // console.log("Clicked file:", fileName);
   };
 
   // Function to handle input change
@@ -80,7 +79,8 @@ function FilesTab({ activeFile, setActiveFile }) {
       <div className="fileList">
         {files.map((file, index) => (
           <div
-            className="fileItem"
+            className={`fileItem`}
+            id={`${activeFile === file.name ? 'active' : ''}`}
             key={index}
             onClick={() => handleFileClick(file.name)}
           >
