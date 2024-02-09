@@ -35,7 +35,9 @@ function ChatBox({ chat, sendMessage, currentUser }) {
                 {`${getOrdinalSuffix(new Date(message.timestamp))} ${new Date(message.timestamp).toLocaleString("en-US", { month: "long", hour: "numeric", minute: "numeric", hour12: true })}`}
               </small> */}
               <small>
-                {message.user === currentUser.id ? "You" : message.user}{" "}
+                {message.user === currentUser.id ? "You" : message.username}{" "}
+              </small>
+              <small>
                 {new Date(message.timestamp).toLocaleTimeString("en-US", {
                   hour: "numeric",
                   minute: "numeric",

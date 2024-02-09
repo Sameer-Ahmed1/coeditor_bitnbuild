@@ -70,3 +70,7 @@ button.send-btn:hover {
   height: 30vh; /* Adjust this value as needed */
   overflow-y: auto;
 }
+.sent small, .received small {
+  color: #777; /* change this to a color that is visible on your background */
+  font-size: 0.8em;
+}
