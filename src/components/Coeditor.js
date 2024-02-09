@@ -38,6 +38,7 @@ export default function Coeditor({
           <input className="input-text" placeholder="Enter input here"/>
         </div>
         <div className="output">
+          <p>output</p>
           <pre>{fileContents}</pre>
         </div>
         <button onClick={closeCard} className="close-button">
