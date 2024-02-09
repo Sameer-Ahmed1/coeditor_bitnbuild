@@ -7,6 +7,7 @@ import PersonLogin from "./components/PersonLogin"; // Import PersonLogin compon
 import { useState, useEffect, useReducer } from "react";
 import ChatBox from "./components/ChatBox";
 import socketIOClient from "socket.io-client";
+// import { io } from "socket.io-client";
 import loginService from "./services/login";
 import userService from "./services/user";
 import Notification from "./components/notification";
@@ -17,6 +18,8 @@ const ENDPOINT =
   process.env.NODE_ENV === "production"
     ? process.env.REACT_APP_BASE_URL
     : "http://localhost:4001";
+
+// const socket = io(ENDPOINT);
 
 function App() {
   const [inRoom, setInRoom] = useState(false);
@@ -50,11 +53,11 @@ function App() {
   });
   const [roomId, setRoomId] = useState("");
   const [activeFile, setActiveFile] = useState("script.js");
-
+  const [chatMessages, setChatMessages] = useState([]);
   useEffect(() => {
     const newSocket = socketIOClient(ENDPOINT);
     setSocket(newSocket);
-
+    console.log("socket io connected");
     return () => {
       newSocket.disconnect();
     };
@@ -63,6 +66,7 @@ function App() {
     if (socket == null) return;
 
     socket.on("code", ({ fileName, newCode }) => {
+      console.log("code recieved  from there", fileName, newCode);
       setFiles((oldFiles) => ({
         ...oldFiles,
         [fileName]: newCode,
@@ -78,11 +82,22 @@ function App() {
 
       // Handle the error (e.g., show a notification, update the UI, etc.)
     });
-
+    socket.on("message", (messageData) => {
+      // If the message was sent by the current user, add a 'sent' property to it
+      console.log("message recieved ", messageData);
+      // console.log("current user", currentUser);
+      // if (messageData.user === currentUser.id) {
+      //   messageData.sent = true;
+      // } else {
+      //   messageData.sent = false;
+      // }
+      setChatMessages((oldMessages) => [...oldMessages, messageData]);
+    });
     return () => {
       if (socket) {
         socket.off("code");
         socket.off("error");
+        socket.off("message");
       }
     };
   }, [socket]);
@@ -150,6 +165,19 @@ function App() {
       // Handle the error (e.g., show a notification, update the UI, etc.)
     }
   };
+
+  const sendMessage = (message) => {
+    // console.log("roomid when message", roomId);
+    // console.log("current user when message", currentUser);
+
+    if (socket == null && !currentUser) return;
+    socket.emit("message", roomId, currentUser.username, message);
+    // setChatMessages((oldMessages) => [
+    //   ...oldMessages,
+    //   { user: currentUser.id, message, timestamp: Date.now(), sent: true },
+    // ]);
+  };
+
   /****************************************************** */
   const [signUp, setSignup] = useState(false);
   const [persons, setPersons] = useState([
@@ -281,7 +309,11 @@ function App() {
                 DEFAULT_FILE_NAME={DEFAULT_FILE_NAME}
               />
               {showChatBox && (
-                <ChatBox chat={currRoom ? currRoom.chat : null} />
+                <ChatBox
+                  chat={chatMessages}
+                  sendMessage={sendMessage}
+                  currentUser={currentUser}
+                />
               )}
               <button
                 className="ChatBoxButton"

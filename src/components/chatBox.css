@@ -22,7 +22,7 @@
   flex-direction:row;
   align-items:flex-end ;
   justify-content: end;
-  margin-top: 64vh;
+  margin-top: 10vh;
 
 }
 .input-message{
@@ -49,3 +49,24 @@ button.send-btn:hover {
   color:rgb(22, 22, 24);
   background-color:#f2f4f4 ;
 } 
+.sent {
+  text-align: right;
+  background-color: #d1e7dd; /* Light green */
+  color: #000; /* Black text */
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.received {
+  text-align: left;
+  background-color: #f8d7da; /* Light red */
+  color: #000; /* Black text */
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
+}
+.ChatBox ul {
+  height: 30vh; /* Adjust this value as needed */
+  overflow-y: auto;
+}
