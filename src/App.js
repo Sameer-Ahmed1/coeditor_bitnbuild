@@ -31,7 +31,7 @@ function App() {
       const roomIdFromStorage = window.localStorage.getItem("roomId");
 
       if (roomIdFromStorage) {
-        setRoomId(roomId);
+        setRoomId(roomIdFromStorage);
         setInRoom(true);
       }
       // If you're using the token in all requests to the server
@@ -208,7 +208,7 @@ function App() {
         room: user.rooms,
       });
       if (user.rooms && user.rooms.length > 0) {
-        setRoomId(roomId);
+        setRoomId(user.rooms);
         setInRoom(true);
       }
     } catch (error) {
@@ -256,7 +256,11 @@ function App() {
       <ErrorMessage message={error} />
       {loginStatus ? (
         inRoom ? (
-          <RoomNavBar roomId={roomId} handleLogout={handleLogout} handleLeaveRoom={leaveRoom} />
+          <RoomNavBar
+            roomId={roomId}
+            handleLogout={handleLogout}
+            handleLeaveRoom={leaveRoom}
+          />
         ) : (
           <NavBar handleLogout={handleLogout} loginStatus={loginStatus} />
         )
