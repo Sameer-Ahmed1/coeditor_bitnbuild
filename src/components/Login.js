@@ -62,7 +62,7 @@ function Login({ joinRoom, roomId, setRoomId }) {
   return (
     <div className="login-container">
       <div className="sign-in-box">
-        <h2>Access Room</h2>
+        <h2>ACCESS ROOM</h2>
         <input
           type="text"
           className="input-ele"
@@ -77,7 +77,7 @@ function Login({ joinRoom, roomId, setRoomId }) {
         {/* <div className="error-login">{error}</div> Display error message */}
       </div>
       <div className="create-room-box">
-        <h2>Create New Room</h2>
+        <h2>CREATE NEW ROOM</h2>
         <input
           type="text" 
           className="input-ele"
