@@ -9,24 +9,28 @@
   
   .run-button-container {
     position: fixed;
-    top: 100px;
-    right: 20px;
+    top: 80px;
+    right: 40px;
     z-index: 1000;
   }
-  
-  .run-button {
-    padding: 8px 12px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .run-button:hover {
-    background-color: #0056b3;
-  }
-  
+.run-button{
+  background:#101112;
+  border:2px solid #aed2ff;
+  font-size:40px ;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius:10px ;
+  color: #aed2ff;
+  cursor: pointer;
+}
+.run-button:hover{
+  background:#aed2ff;
+  border:2px solid #101112;
+  color: #101112;
+
+}
   .code-card {
     position: fixed;
     top: 100px; /* Adjust as needed */
