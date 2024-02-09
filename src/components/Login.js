@@ -1,8 +1,8 @@
 import { useState } from "react";
 import "./Login.css";
 
-function Login({ joinRoom, roomId, setRoomId }) {
-  // const [newRoomName, setNewRoomName] = useState('');
+function Login({ joinRoom, roomId, setRoomId, createRoom }) {
+  const [newRoomId, setNewRoomId] = useState("");
   // const [roomID, setRoomID] = useState('');
   // const [joinLink, setJoinLink] = useState('');
   // const [error, setError] = useState('');
@@ -79,13 +79,15 @@ function Login({ joinRoom, roomId, setRoomId }) {
       <div className="create-room-box">
         <h2>CREATE NEW ROOM</h2>
         <input
-          type="text" 
+          type="text"
           className="input-ele"
-          placeholder="Enter Room Name"
-          // value={newRoomName}
-          // onChange={(e) => setNewRoomName(e.target.value)}
+          placeholder="Enter id"
+          value={newRoomId}
+          onChange={(e) => setNewRoomId(e.target.value)}
         />
-        <button className="button-lgn">Create</button>
+        <button className="button-lgn" onClick={() => createRoom(newRoomId)}>
+          Create
+        </button>
       </div>
       {/* <button className="button-lgn" onClick={() => setInRoom(true)}> */}
       {/* Choose No Room */}
