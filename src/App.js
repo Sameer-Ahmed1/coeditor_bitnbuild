@@ -4,7 +4,7 @@ import NavBar from "./components/NavBar";
 import RoomNavBar from "./components/RoomNavBar";
 import Login from "./components/Login";
 import PersonLogin from "./components/PersonLogin"; // Import PersonLogin component
-import { useState, useEffect } from "react";
+import { useState, useEffect, useReducer } from "react";
 import ChatBox from "./components/ChatBox";
 import socketIOClient from "socket.io-client";
 import loginService from "./services/login";
@@ -28,6 +28,10 @@ function App() {
       const user = JSON.parse(loggedUserJSON);
       setCurrentUser({ username: user.username, id: user.id });
       setLoginStatus(true);
+      if (roomId) {
+        setRoomId(roomId);
+        setInRoom(true);
+      }
       // If you're using the token in all requests to the server
       // you can set it in the headers of axios here
       // axios.defaults.headers.common['Authorization'] = `Bearer ${user.token}`;
@@ -101,7 +105,7 @@ function App() {
       if (!roomExists) {
         throw new Error("Room does not exist");
       }
-
+      window.localStorage.setItem("roomId", roomId);
       setInRoom(true);
       socket.emit("join", roomId, currentUser.id);
     } catch (error) {
@@ -168,14 +172,14 @@ function App() {
   //localStorage.removeItem('currPerson'); -> run this in the console to clear local person
   const [showChatBox, setShowChatBox] = useState(false); // State to manage ChatBox visibility
 
-  useEffect(() => {
-    const storedPerson = localStorage.getItem("currPerson");
-    if (storedPerson) {
-      const parsedPerson = JSON.parse(storedPerson);
-      setCurrPerson(parsedPerson);
-      setLoginStatus(true);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const storedPerson = localStorage.getItem("currPerson");
+  //   if (storedPerson) {
+  //     const parsedPerson = JSON.parse(storedPerson);
+  //     setCurrPerson(parsedPerson);
+  //     setLoginStatus(true);
+  //   }
+  // }, []);
 
   // console.log(currRoom, rooms);
 
@@ -199,6 +203,10 @@ function App() {
         id: user.id,
         room: user.rooms,
       });
+      if (user.rooms && user.rooms.length > 0) {
+        setRoomId(roomId);
+        setInRoom(true);
+      }
     } catch (error) {
       // setError(e);
       console.log(error);
