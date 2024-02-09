@@ -240,5 +240,8 @@ h1 {
     color: #fff;
     background-color: #444;
   }
+  .layer{
+    display: none;
+  }
   
 }
