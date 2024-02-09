@@ -4,7 +4,7 @@ import NavBar from "./components/NavBar";
 import RoomNavBar from "./components/RoomNavBar";
 import Login from "./components/Login";
 import PersonLogin from "./components/PersonLogin"; // Import PersonLogin component
-import { useState, useEffect } from "react";
+import { useState, useEffect, useReducer } from "react";
 import ChatBox from "./components/ChatBox";
 import socketIOClient from "socket.io-client";
 import loginService from "./services/login";
@@ -12,6 +12,7 @@ import userService from "./services/user";
 import Notification from "./components/notification";
 import ErrorMessage from "./components/errorMessage";
 import "./App.css";
+import roomService from "./services/room";
 const ENDPOINT =
   process.env.NODE_ENV === "production"
     ? process.env.REACT_APP_BASE_URL
@@ -20,13 +21,17 @@ const ENDPOINT =
 function App() {
   const [inRoom, setInRoom] = useState(false);
   const [loginStatus, setLoginStatus] = useState(false);
-
+  const [currentUser, setCurrentUser] = useState(null);
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem("loggedPhonebookUser");
     if (loggedUserJSON) {
-      // const user = JSON.parse(loggedUserJSON);
-      // setUser(user);
+      const user = JSON.parse(loggedUserJSON);
+      setCurrentUser({ username: user.username, id: user.id });
       setLoginStatus(true);
+      if (roomId) {
+        setRoomId(roomId);
+        setInRoom(true);
+      }
       // If you're using the token in all requests to the server
       // you can set it in the headers of axios here
       // axios.defaults.headers.common['Authorization'] = `Bearer ${user.token}`;
@@ -52,15 +57,32 @@ function App() {
       newSocket.disconnect();
     };
   }, []);
-
   useEffect(() => {
     if (socket == null) return;
+
     socket.on("code", ({ fileName, newCode }) => {
       setFiles((oldFiles) => ({
         ...oldFiles,
         [fileName]: newCode,
       }));
     });
+
+    socket.on("error", (errorMessage) => {
+      // console.error(errorMessage);
+      setError("socket erro" + errorMessage);
+      setTimeout(() => {
+        setError(null);
+      }, 5000);
+
+      // Handle the error (e.g., show a notification, update the UI, etc.)
+    });
+
+    return () => {
+      if (socket) {
+        socket.off("code");
+        socket.off("error");
+      }
+    };
   }, [socket]);
 
   const handleCodeChange = (newCode) => {
@@ -73,18 +95,57 @@ function App() {
     }
   };
 
-  const joinRoom = () => {
+  const joinRoom = async () => {
     if (socket == null) return;
-    setInRoom(true);
-    socket.emit("join", roomId);
+
+    try {
+      const rooms = await roomService.getRooms();
+      const roomExists = rooms.some((room) => room.roomId === roomId);
+
+      if (!roomExists) {
+        throw new Error("Room does not exist");
+      }
+      window.localStorage.setItem("roomId", roomId);
+      setInRoom(true);
+      socket.emit("join", roomId, currentUser.id);
+    } catch (error) {
+      // console.error(error);
+      setError(error.message);
+      setTimeout(() => {
+        setError(null);
+      }, 5000);
+      // Handle the error (e.g., show a notification, update the UI, etc.)
+    }
   };
   const leaveRoom = () => {
     if (socket == null) return;
-    socket.emit("leave", roomId);
+    socket.emit("leave", roomId, currentUser.id);
     setRoomId(""); // Clear the room ID
     setInRoom(false);
   };
+  const createRoom = async (newRoomId) => {
+    if (socket == null) return;
 
+    try {
+      const rooms = await roomService.getRooms();
+      const roomExists = rooms.some((room) => room.roomId === newRoomId);
+
+      if (roomExists) {
+        throw new Error("Room already exists");
+      }
+
+      socket.emit("create", newRoomId, currentUser.id);
+      setInRoom(true);
+      setRoomId(newRoomId);
+    } catch (error) {
+      // console.error(error);
+      setError(error.message);
+      setTimeout(() => {
+        setError(null);
+      }, 5000);
+      // Handle the error (e.g., show a notification, update the UI, etc.)
+    }
+  };
   /****************************************************** */
   const [signUp, setSignup] = useState(false);
   const [persons, setPersons] = useState([
@@ -111,14 +172,14 @@ function App() {
   //localStorage.removeItem('currPerson'); -> run this in the console to clear local person
   const [showChatBox, setShowChatBox] = useState(false); // State to manage ChatBox visibility
 
-  useEffect(() => {
-    const storedPerson = localStorage.getItem("currPerson");
-    if (storedPerson) {
-      const parsedPerson = JSON.parse(storedPerson);
-      setCurrPerson(parsedPerson);
-      setLoginStatus(true);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const storedPerson = localStorage.getItem("currPerson");
+  //   if (storedPerson) {
+  //     const parsedPerson = JSON.parse(storedPerson);
+  //     setCurrPerson(parsedPerson);
+  //     setLoginStatus(true);
+  //   }
+  // }, []);
 
   // console.log(currRoom, rooms);
 
@@ -133,12 +194,22 @@ function App() {
 
       window.localStorage.setItem("loggedPhonebookUser", JSON.stringify(user));
 
-      // setUser(user);
+      console.log("user", user);
       setUsername("");
       setPassword("");
       setLoginStatus(true);
-    } catch (e) {
-      setError(e.response.data.error);
+      setCurrentUser({
+        username: user.username,
+        id: user.id,
+        room: user.rooms,
+      });
+      if (user.rooms && user.rooms.length > 0) {
+        setRoomId(roomId);
+        setInRoom(true);
+      }
+    } catch (error) {
+      // setError(e);
+      console.log(error);
       setTimeout(() => {
         setError(null);
       }, 5000);
@@ -165,7 +236,7 @@ function App() {
       // window.location.href = "/";
     } catch (error) {
       console.log(error);
-      setError(error.response.data.error);
+      // setError(error);
       setTimeout(() => {
         setError(null);
       }, 5000);
@@ -212,7 +283,12 @@ function App() {
               </button>
             </>
           ) : (
-            <Login joinRoom={joinRoom} roomId={roomId} setRoomId={setRoomId} />
+            <Login
+              joinRoom={joinRoom}
+              roomId={roomId}
+              setRoomId={setRoomId}
+              createRoom={createRoom}
+            />
           )
         ) : (
           <PersonLogin
