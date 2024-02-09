@@ -1,8 +1,11 @@
 .FilesTab {
     background-color: #1e1e1e; /* Background color of the FilesTab */
     color: #d4d4d4; /* Text color */  
-     padding: 10px; /* Padding for better appearance */
+    padding: 10px; /* Padding for better appearance */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Font family */
+    overflow-y: auto;
+    height: 89vh;
+
 }
 
 .inputContainer {
@@ -21,7 +24,9 @@
     flex: 1; /* Take remaining space */
     margin-right: 10px; /* Add margin between input and submit button */
 }
-
+.fileInput:hover{
+    color: #f1ecec;
+}
 .addButton {
     background:none;
     color: white; /* Text color */
@@ -33,13 +38,18 @@
 }
 
 .addButton:hover {
-    border-radius:180px;
+    border-radius:50%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: #444;
 }
 
 .fileList {
     display: flex;
     flex-direction: column;
+    padding-right: 10px;
 }
 
 .fileItem {
