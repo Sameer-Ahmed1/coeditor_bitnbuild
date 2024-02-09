@@ -1,15 +1,19 @@
+import "./notification.css"
 const Notification = ({ message }) => {
   if (!message) {
     return null;
   }
+
+  
   return (
-    <div className="text-center my-3">
-      <div className="col-12 col-sm-8 col-md-6 col-lg-4 mx-auto">
-        <div className="alert alert-success" role="alert">
-          {message}
+    <div className="container">
+    <div className="row">
+        <div className="alert fade alert-simple alert-success fadeIn">
+          <strong className="font__weight-semibold">{message}</strong>
         </div>
+      
       </div>
-    </div>
+      </div>
   );
 };
 
