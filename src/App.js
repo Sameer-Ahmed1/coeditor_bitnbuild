@@ -28,7 +28,9 @@ function App() {
       const user = JSON.parse(loggedUserJSON);
       setCurrentUser({ username: user.username, id: user.id });
       setLoginStatus(true);
-      if (roomId) {
+      const roomIdFromStorage = window.localStorage.getItem("roomId");
+
+      if (roomIdFromStorage) {
         setRoomId(roomId);
         setInRoom(true);
       }
@@ -69,7 +71,7 @@ function App() {
 
     socket.on("error", (errorMessage) => {
       // console.error(errorMessage);
-      setError("socket erro" + errorMessage);
+      setError("socket error" + errorMessage);
       setTimeout(() => {
         setError(null);
       }, 5000);
@@ -122,6 +124,7 @@ function App() {
     socket.emit("leave", roomId, currentUser.id);
     setRoomId(""); // Clear the room ID
     setInRoom(false);
+    window.localStorage.removeItem("roomId");
   };
   const createRoom = async (newRoomId) => {
     if (socket == null) return;
@@ -137,6 +140,7 @@ function App() {
       socket.emit("create", newRoomId, currentUser.id);
       setInRoom(true);
       setRoomId(newRoomId);
+      window.localStorage.setItem("roomId", newRoomId);
     } catch (error) {
       // console.error(error);
       setError(error.message);
@@ -208,7 +212,7 @@ function App() {
         setInRoom(true);
       }
     } catch (error) {
-      // setError(e);
+      setError(error.response.data.error || "error");
       console.log(error);
       setTimeout(() => {
         setError(null);
@@ -236,7 +240,7 @@ function App() {
       // window.location.href = "/";
     } catch (error) {
       console.log(error);
-      // setError(error);
+      setError(error.response.data.error || "error");
       setTimeout(() => {
         setError(null);
       }, 5000);
