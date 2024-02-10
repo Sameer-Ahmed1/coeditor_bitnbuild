@@ -18,7 +18,7 @@ export default function Coeditor({
   };
 
   const runFile = () => {
-    setFileContents(files[activeFile] || DEFAULT_CODE);
+    setFileContents(eval(files[activeFile] || DEFAULT_CODE));
     toggleCardVisibility();
   };
 
@@ -30,26 +30,49 @@ export default function Coeditor({
     <div className="Coeditor">
       <div className="run-button-container">
         <button onClick={runFile} className="run-button">
-        <svg className='svg-icon' xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 20 20"><path fill="currentColor" d="M17.215 8.68c1.047.568 1.047 2.07 0 2.638l-11.999 6.5a1.5 1.5 0 0 1-2.214-1.32V3.5a1.5 1.5 0 0 1 2.214-1.32z"/></svg>
+          <svg
+            className="svg-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            width="1em"
+            height="1em"
+            viewBox="0 0 20 20"
+          >
+            <path
+              fill="currentColor"
+              d="M17.215 8.68c1.047.568 1.047 2.07 0 2.638l-11.999 6.5a1.5 1.5 0 0 1-2.214-1.32V3.5a1.5 1.5 0 0 1 2.214-1.32z"
+            />
+          </svg>
         </button>
       </div>
-      {isCardVisible && <div className={`code-card`}>
-        <div className="input">
-          <input className="input-text" placeholder="Enter input here"/>
+      {isCardVisible && (
+        <div className={`code-card`}>
+          <div className="input">
+            <input className="input-text" placeholder="Enter input here" />
+          </div>
+          <div className="output">
+            <p>output</p>
+            <pre>{fileContents}</pre>
+          </div>
+          <button onClick={closeCard} className="close-button">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="1em"
+              height="1em"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="currentColor"
+                d="M6.4 19L5 17.6l5.6-5.6L5 6.4L6.4 5l5.6 5.6L17.6 5L19 6.4L13.4 12l5.6 5.6l-1.4 1.4l-5.6-5.6z"
+              />
+            </svg>
+          </button>
         </div>
-        <div className="output">
-          <p>output</p>
-          <pre>{fileContents}</pre>
-        </div>
-        <button onClick={closeCard} className="close-button">
-        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M6.4 19L5 17.6l5.6-5.6L5 6.4L6.4 5l5.6 5.6L17.6 5L19 6.4L13.4 12l5.6 5.6l-1.4 1.4l-5.6-5.6z"/></svg>
-        </button>
-      </div>}
+      )}
       <Editor
         className="Editor"
         height="90vh"
         defaultLanguage="javascript"
-        defaultValue="// some comment"
+        // defaultValue="// some comment"
         value={files[activeFile]?.toString() || DEFAULT_CODE}
         onChange={handleCodeChange}
       />

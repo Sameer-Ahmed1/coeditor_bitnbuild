@@ -1,13 +1,19 @@
 import React, { useState } from "react";
 import "./FilesTab.css"; // Import your CSS file for styling
 
-function FilesTab({ activeFile, setActiveFile }) {
+function FilesTab({
+  files,
+  activeFile,
+  setActiveFile,
+  DEFAULT_CODE,
+  setFiles,
+}) {
   // State to store the list of files
-  const [files, setFiles] = useState([
-    { name: "script.js" },
-    { name: "style.css" },
-    { name: "index.html" },
-  ]);
+  // const [files, setFiles] = useState([
+  //   { name: "script.js" },
+  //   { name: "style.css" },
+  //   { name: "index.html" },
+  // ]);
   // State to manage the input value
   const [fileNameInput, setFileNameInput] = useState("");
   // State to track if the input box is visible
@@ -52,7 +58,12 @@ function FilesTab({ activeFile, setActiveFile }) {
       // You can add additional properties to the file object as needed
     };
     // Add the new file to the list of files
-    setFiles([...files, newFile]);
+    // setFiles([...files, newFile]);
+    console.log("newFile", newFile);
+    setFiles((oldFiles) => ({
+      ...oldFiles,
+      [newFile.name]: DEFAULT_CODE,
+    }));
     // Clear the input field
     setFileNameInput("");
   };
@@ -77,7 +88,7 @@ function FilesTab({ activeFile, setActiveFile }) {
       </div>
       {/* Display the list of files */}
       <div className="fileList">
-        {files.map((file, index) => (
+        {/* {files.map((file, index) => (
           <div
             className={`fileItem`}
             id={`${activeFile === file.name ? 'active' : ''}`}
@@ -85,6 +96,16 @@ function FilesTab({ activeFile, setActiveFile }) {
             onClick={() => handleFileClick(file.name)}
           >
             {file.name}
+          </div>
+        ))} */}
+        {Object.keys(files).map((fileName, index) => (
+          <div
+            className={`fileItem`}
+            id={`${activeFile === fileName ? "active" : ""}`}
+            key={index}
+            onClick={() => handleFileClick(fileName)}
+          >
+            {fileName}
           </div>
         ))}
       </div>

@@ -139,6 +139,9 @@ function App() {
     socket.emit("leave", roomId, currentUser.id);
     setRoomId(""); // Clear the room ID
     setInRoom(false);
+    setFiles({
+      [DEFAULT_FILE_NAME]: DEFAULT_CODE,
+    });
     window.localStorage.removeItem("roomId");
   };
   const createRoom = async (newRoomId) => {
@@ -300,7 +303,13 @@ function App() {
         {loginStatus ? (
           inRoom ? (
             <>
-              <SideBar activeFile={activeFile} setActiveFile={setActiveFile} />
+              <SideBar
+                setFiles={setFiles}
+                files={files}
+                activeFile={activeFile}
+                setActiveFile={setActiveFile}
+                DEFAULT_CODE={DEFAULT_CODE}
+              />
               <Coeditor
                 handleCodeChange={handleCodeChange}
                 files={files}

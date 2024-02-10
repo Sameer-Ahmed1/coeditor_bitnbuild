@@ -67,7 +67,7 @@ button.send-btn:hover {
   border-radius: 10px;
 }
 .ChatBox ul {
-  height: 30vh; /* Adjust this value as needed */
+  height: 55vh; /* Adjust this value as needed */
   overflow-y: auto;
 }
 .sent small, .received small {
