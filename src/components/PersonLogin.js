@@ -33,13 +33,19 @@ function PersonLogin({
             </svg>
             Editor
           </h3>
-          <p>A Collaborative Code Editor with Room-Based Collaboration is an interactive web application designed to empower users to collaborate seamlessly on coding projects. This platform not only offers real-time code editing but also incorporates a room-based system, providing a personalized and secure environment for collaborative coding experiences.
+          <p>
+            A Collaborative Code Editor with Room-Based Collaboration is an
+            interactive web application designed to empower users to collaborate
+            seamlessly on coding projects. This platform not only offers
+            real-time code editing but also incorporates a room-based system,
+            providing a personalized and secure environment for collaborative
+            coding experiences.
           </p>
         </div>
       </div>
       <div className="content-container">
         <div className="form-container">
-          <h1>{showSignIn ? "Sign In" : "Login"}</h1>
+          <h1>{showSignIn ? "Sign Up" : "Login"}</h1>
           <span className="subtitle">USERNAME</span>
           <br />
           <input
@@ -68,13 +74,13 @@ function PersonLogin({
           className="btn login-btn"
           onClick={showSignIn ? handleSignIn : handleLogin}
         >
-          {showSignIn ? "Sign In" : "Login"}
+          {showSignIn ? "Sign Up" : "Login"}
         </button>
         <button
           className="btn new-user-btn"
           onClick={() => setShowSignIn(!showSignIn)}
         >
-          {showSignIn ? "Switch to Login" : "Sign In Instead?"}
+          {showSignIn ? "Switch to Login" : "Sign Up Instead?"}
         </button>
       </div>
     </div>
