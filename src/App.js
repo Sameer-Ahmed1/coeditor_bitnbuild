@@ -292,6 +292,7 @@ function App() {
             handleLogout={handleLogout}
             handleLeaveRoom={leaveRoom}
             currUser={currentUser}
+            setnotification={setnotification}
           />
         ) : (
           <NavBar handleLogout={handleLogout} loginStatus={loginStatus} />

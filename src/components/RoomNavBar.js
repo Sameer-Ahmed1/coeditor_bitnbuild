@@ -1,10 +1,29 @@
 import React from "react";
 import "./RoomNavBar.css";
+import Notification from "./notification";
 
-function RoomNavBar({ handleLeaveRoom, handleLogout, roomId, currUser}) {
+function RoomNavBar({ handleLeaveRoom, handleLogout, roomId, currUser,setnotification}) {
   const handleButtonClick = (buttonName) => {
     console.log(buttonName);
   };
+
+  function myFunction(roomId) {
+    // Get the text field
+  
+    // // Select the text field
+    // copyText.select();
+    // copyText.setSelectionRange(0, 99999); // For mobile devices
+  
+     // Copy the text inside the text field
+    navigator.clipboard.writeText(roomId);
+  
+    // Alert the copied text
+    setnotification("Room ID copied")
+    setTimeout(() => {
+      setnotification(null);
+    }, 500);
+    // alert("Copied the text: " + copyText);
+  }
 
   return (
     <div className="RoomNavBar">
@@ -26,9 +45,9 @@ function RoomNavBar({ handleLeaveRoom, handleLogout, roomId, currUser}) {
         </a>
       </div>
       <div className="buttons">
-        {roomId && <p className="button room-id-btn">
+        {roomId && <button onClick={() => myFunction(roomId)} className="button room-id-btn">
           Room ID {": " + roomId}
-        </p>}
+        </button>}
         {currUser && currUser.username && <p className="button user-btn">
           USER {": " + currUser.username}
         </p>}
