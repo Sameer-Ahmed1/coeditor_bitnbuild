@@ -17,6 +17,7 @@ function RoomNavBar({
     try {
       const rooms = await roomService.getRooms();
       console.log("rooms fetched ", rooms);
+  
       const room = rooms.find((room) => room.roomId === roomId);
       //fetch current users
       let currentUsers = null;
@@ -29,11 +30,17 @@ function RoomNavBar({
       }
       let allUsers = await userService.getUsers();
       console.log("all users fetched ", allUsers);
+  
+      // Filter out current users
+      const otherUsers = allUsers.filter(user => !currentUsers.users.some(currUser => currUser === user.id));
+      console.log("other users ", otherUsers);
+  
     } catch (err) {
       console.log(err);
       // setError
     }
   };
+  
   const handleAddPeople = () => {
     fetchUsers();
   };
