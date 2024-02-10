@@ -39,7 +39,7 @@ function PersonLogin({
       </div>
       <div className="content-container">
         <div className="form-container">
-          <h1>Login</h1>
+          <h1>{showSignIn ? "Sign In" : "Login"}</h1>
           <span className="subtitle">USERNAME</span>
           <br />
           <input
