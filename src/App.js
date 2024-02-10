@@ -12,6 +12,7 @@ import loginService from "./services/login";
 import userService from "./services/user";
 import Notification from "./components/notification";
 import ErrorMessage from "./components/errorMessage";
+import ShowPeople from "./components/ShowPeople"
 import "./App.css";
 import roomService from "./services/room";
 const ENDPOINT =
@@ -288,6 +289,9 @@ function App() {
     window.localStorage.removeItem("loggedPhonebookUser");
     window.location.reload();
   };
+
+  const [showPeople,setShowPeople] = useState(false);
+
   return (
     <div className="App">
       <Notification message={notification} />
@@ -300,6 +304,8 @@ function App() {
             handleLeaveRoom={leaveRoom}
             currUser={currentUser}
             setnotification={setnotification}
+            setShowPeople={setShowPeople}
+            showPeople={showPeople}
           />
         ) : (
           <NavBar handleLogout={handleLogout} loginStatus={loginStatus} />
@@ -339,6 +345,13 @@ function App() {
               >
                 Toggle ChatBox
               </button>
+              {showPeople && (
+                <ShowPeople
+                  roomId={roomId}
+                  currUser={currentUser}
+                  setnotification={setnotification}
+                />
+              )}
             </>
           ) : (
             <Login

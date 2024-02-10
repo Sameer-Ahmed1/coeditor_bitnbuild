@@ -1,6 +1,5 @@
 import React from "react";
 import "./RoomNavBar.css";
-import Notification from "./notification";
 import roomService from "../services/room";
 import userService from "../services/user";
 function RoomNavBar({
@@ -9,6 +8,8 @@ function RoomNavBar({
   roomId,
   currUser,
   setnotification,
+  showPeople,
+  setShowPeople
 }) {
   const handleButtonClick = (buttonName) => {
     console.log(buttonName);
@@ -41,8 +42,8 @@ function RoomNavBar({
     }
   };
   
-  const handleAddPeople = () => {
-    fetchUsers();
+  const handleShowPeople = () => {
+    setShowPeople(!showPeople)
   };
   function myFunction(roomId) {
     // Get the text field
@@ -96,8 +97,8 @@ function RoomNavBar({
         <button className="button" onClick={handleLogout}>
           Log out
         </button>
-        <button className="button" onClick={handleAddPeople}>
-          Add People
+        <button className="button" onClick={handleShowPeople}>
+          {showPeople ? "Hide People" : "show People"}
         </button>
         <button className="leaveBtn" onClick={handleLeaveRoom}>
           Leave Room
