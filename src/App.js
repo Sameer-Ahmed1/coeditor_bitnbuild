@@ -142,6 +142,7 @@ function App() {
     setFiles({
       [DEFAULT_FILE_NAME]: DEFAULT_CODE,
     });
+    setChatMessages([]);
     window.localStorage.removeItem("roomId");
   };
   const createRoom = async (newRoomId) => {
@@ -174,7 +175,13 @@ function App() {
     // console.log("current user when message", currentUser);
 
     if (socket == null && !currentUser) return;
-    socket.emit("message", roomId, currentUser.username, message);
+    socket.emit(
+      "message",
+      roomId,
+      currentUser.id,
+      message,
+      currentUser.username
+    );
     // setChatMessages((oldMessages) => [
     //   ...oldMessages,
     //   { user: currentUser.id, message, timestamp: Date.now(), sent: true },
