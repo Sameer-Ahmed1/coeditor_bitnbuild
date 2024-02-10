@@ -5,4 +5,9 @@ const createUser = async (newObj) => {
   const response = await axios.post(baseUrl, newObj);
   return response.data;
 };
-export default { createUser };
+const getUsers = async () => {
+  const response = await axios.get(baseUrl);
+  return response.data;
+};
+
+export default { createUser, getUsers };

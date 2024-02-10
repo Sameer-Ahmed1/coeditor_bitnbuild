@@ -1,24 +1,54 @@
 import React from "react";
 import "./RoomNavBar.css";
 import Notification from "./notification";
-
-function RoomNavBar({ handleLeaveRoom, handleLogout, roomId, currUser,setnotification}) {
+import roomService from "../services/room";
+import userService from "../services/user";
+function RoomNavBar({
+  handleLeaveRoom,
+  handleLogout,
+  roomId,
+  currUser,
+  setnotification,
+}) {
   const handleButtonClick = (buttonName) => {
     console.log(buttonName);
   };
-
+  const fetchUsers = async () => {
+    try {
+      const rooms = await roomService.getRooms();
+      console.log("rooms fetched ", rooms);
+      const room = rooms.find((room) => room.roomId === roomId);
+      //fetch current users
+      let currentUsers = null;
+      if (room) {
+        currentUsers = await roomService.getOneRoom(room.id);
+        console.log("current users  ", currentUsers);
+        // do something with users
+      } else {
+        console.log("Room not found");
+      }
+      let allUsers = await userService.getUsers();
+      console.log("all users fetched ", allUsers);
+    } catch (err) {
+      console.log(err);
+      // setError
+    }
+  };
+  const handleAddPeople = () => {
+    fetchUsers();
+  };
   function myFunction(roomId) {
     // Get the text field
-  
+
     // // Select the text field
     // copyText.select();
     // copyText.setSelectionRange(0, 99999); // For mobile devices
-  
-     // Copy the text inside the text field
+
+    // Copy the text inside the text field
     navigator.clipboard.writeText(roomId);
-  
+
     // Alert the copied text
-    setnotification("Room ID copied")
+    setnotification("Room ID copied");
     setTimeout(() => {
       setnotification(null);
     }, 500);
@@ -45,19 +75,21 @@ function RoomNavBar({ handleLeaveRoom, handleLogout, roomId, currUser,setnotific
         </a>
       </div>
       <div className="buttons">
-        {roomId && <button onClick={() => myFunction(roomId)} className="button room-id-btn">
-          Room ID {": " + roomId}
-        </button>}
-        {currUser && currUser.username && <p className="button user-btn">
-          USER {": " + currUser.username}
-        </p>}
+        {roomId && (
+          <button
+            onClick={() => myFunction(roomId)}
+            className="button room-id-btn"
+          >
+            Room ID {": " + roomId}
+          </button>
+        )}
+        {currUser && currUser.username && (
+          <p className="button user-btn">USER {": " + currUser.username}</p>
+        )}
         <button className="button" onClick={handleLogout}>
           Log out
         </button>
-        <button
-          className="button"
-          onClick={() => handleButtonClick("Add People")}
-        >
+        <button className="button" onClick={handleAddPeople}>
           Add People
         </button>
         <button className="leaveBtn" onClick={handleLeaveRoom}>
