@@ -25,6 +25,38 @@ export default function Coeditor({
   const closeCard = () => {
     setIsCardVisible(false);
   };
+  function getLanguage(fileName) {
+    const extension = fileName.split(".").pop();
+    console.log("extension", extension);
+    let lang = "plaintext";
+    switch (extension) {
+      case "js":
+        lang = "javascript";
+        break;
+      case "py":
+        lang = "python";
+        break;
+      case "java":
+        lang = "java";
+        break;
+      case "c":
+        lang = "c";
+        break;
+      case "cpp":
+        lang = "cpp";
+        break;
+      case "html":
+        lang = "html";
+        break;
+      case "css":
+        lang = "css";
+        break;
+      default:
+        lang = "plaintext";
+    }
+    console.log("lang", lang);
+    return lang;
+  }
 
   return (
     <div className="Coeditor">
@@ -71,7 +103,9 @@ export default function Coeditor({
       <Editor
         className="Editor"
         height="90vh"
-        defaultLanguage="javascript"
+        // defaultLanguage="javascript"
+        defaultLanguage={"plaintext"}
+        language={getLanguage(activeFile)}
         // defaultValue="// some comment"
         value={files[activeFile]?.toString() || DEFAULT_CODE}
         onChange={handleCodeChange}
