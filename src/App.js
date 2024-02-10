@@ -291,6 +291,7 @@ function App() {
             roomId={roomId}
             handleLogout={handleLogout}
             handleLeaveRoom={leaveRoom}
+            currUser={currentUser}
           />
         ) : (
           <NavBar handleLogout={handleLogout} loginStatus={loginStatus} />

@@ -24,9 +24,7 @@
     flex: 1; /* Take remaining space */
     margin-right: 10px; /* Add margin between input and submit button */
 }
-.fileInput:hover{
-    color: #f1ecec;
-}
+
 .addButton {
     background:none;
     color: white; /* Text color */

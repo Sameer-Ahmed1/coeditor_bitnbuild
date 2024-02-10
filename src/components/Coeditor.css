@@ -9,8 +9,8 @@
   
   .run-button-container {
     position:fixed;
-    top:80px;
-    right: 38px;
+    top:100px;
+    right: 48px;
     z-index: 1000;
   }
 .run-button{
@@ -34,8 +34,8 @@
   .code-card {
     position: fixed;
     border-radius: 5px;
-    top: 120px;
-    right: 85px; 
+    top: 130px;
+    right: 90px; 
     width: 400px;
     height: 500px;
     background-color: #131417;

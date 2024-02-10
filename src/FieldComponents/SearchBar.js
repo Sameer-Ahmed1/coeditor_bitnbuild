@@ -1,7 +1,7 @@
 function SearchBar(){
     return (
         <div className="SearchBar">
-            SearchBar component
+            {/* SearchBar component */}
         </div>
     )
 }

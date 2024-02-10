@@ -1,7 +1,7 @@
 import React from "react";
 import "./RoomNavBar.css";
 
-function RoomNavBar({ handleLeaveRoom, handleLogout,roomId }) {
+function RoomNavBar({ handleLeaveRoom, handleLogout, roomId, currUser}) {
   const handleButtonClick = (buttonName) => {
     console.log(buttonName);
   };
@@ -26,8 +26,11 @@ function RoomNavBar({ handleLeaveRoom, handleLogout,roomId }) {
         </a>
       </div>
       <div className="buttons">
-        {roomId && <p className="button">
-          Room id {": " + roomId}
+        {roomId && <p className="button room-id-btn">
+          Room ID {": " + roomId}
+        </p>}
+        {currUser && currUser.username && <p className="button user-btn">
+          USER {": " + currUser.username}
         </p>}
         <button className="button" onClick={handleLogout}>
           Log out
