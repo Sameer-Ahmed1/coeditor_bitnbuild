@@ -8,33 +8,22 @@ function FilesTab({
   DEFAULT_CODE,
   setFiles,
 }) {
-  // State to store the list of files
-  // const [files, setFiles] = useState([
-  //   { name: "script.js" },
-  //   { name: "style.css" },
-  //   { name: "index.html" },
-  // ]);
-  // State to manage the input value
   const [fileNameInput, setFileNameInput] = useState("");
-  // State to track if the input box is visible
+
   const [inputVisible, setInputVisible] = useState(false);
 
-  // Function to handle adding a new file
   const handleAddFile = () => {
     setInputVisible(true); // Show the input box
   };
 
-  // Function to handle clicking on a file
   const handleFileClick = (fileName) => {
     setActiveFile(fileName);
   };
 
-  // Function to handle input change
   const handleInputChange = (e) => {
     setFileNameInput(e.target.value);
   };
 
-  // Function to handle input blur
   const handleInputBlur = () => {
     if (fileNameInput.trim() !== "") {
       saveFileName();
@@ -42,7 +31,6 @@ function FilesTab({
     setInputVisible(false); // Hide the input box
   };
 
-  // Function to handle Enter key press on input box
   const handleInputKeyPress = (e) => {
     if (e.key === "Enter") {
       saveFileName();
@@ -50,20 +38,16 @@ function FilesTab({
     }
   };
 
-  // Function to save file name
   const saveFileName = () => {
-    // Create a new file object
     const newFile = {
       name: fileNameInput.trim(),
-      // You can add additional properties to the file object as needed
     };
-    // Add the new file to the list of files
-    // setFiles([...files, newFile]);
+
     setFiles((oldFiles) => ({
       ...oldFiles,
       [newFile.name]: DEFAULT_CODE,
     }));
-    // Clear the input field
+
     setFileNameInput("");
   };
 

@@ -8,9 +8,6 @@ function PersonLogin({
   setUsername,
   setPassword,
 }) {
-  // const [username, setUsername] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [confirmPassword, setConfirmPassword] = useState("");
   const [showSignIn, setShowSignIn] = useState(false);
 
   return (

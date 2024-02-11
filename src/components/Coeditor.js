@@ -102,9 +102,7 @@ export default function Coeditor({
         className="Editor"
         height="90vh"
         defaultLanguage="javascript"
-        // defaultLanguage={"plaintext"}
         language={getLanguage(activeFile)}
-        // defaultValue="// some comment"
         value={files[activeFile]?.toString() || DEFAULT_CODE}
         onChange={handleCodeChange}
       />

@@ -7,7 +7,7 @@ import PersonLogin from "./components/PersonLogin"; // Import PersonLogin compon
 import { useState, useEffect, useReducer } from "react";
 import ChatBox from "./components/ChatBox";
 import socketIOClient from "socket.io-client";
-// import { io } from "socket.io-client";
+
 import loginService from "./services/login";
 import userService from "./services/user";
 import Notification from "./components/notification";
@@ -19,8 +19,6 @@ const ENDPOINT =
   process.env.NODE_ENV === "production"
     ? process.env.REACT_APP_BASE_URL
     : "http://localhost:4001";
-
-// const socket = io(ENDPOINT);
 
 function App() {
   const [inRoom, setInRoom] = useState(false);
@@ -38,9 +36,6 @@ function App() {
         setRoomId(roomIdFromStorage);
         setInRoom(true);
       }
-      // If you're using the token in all requests to the server
-      // you can set it in the headers of axios here
-      // axios.defaults.headers.common['Authorization'] = `Bearer ${user.token}`;
     }
   }, []);
 
@@ -73,22 +68,12 @@ function App() {
     });
 
     socket.on("error", (errorMessage) => {
-      // console.error(errorMessage);
       setError("socket error" + errorMessage);
       setTimeout(() => {
         setError(null);
       }, 5000);
-
-      // Handle the error (e.g., show a notification, update the UI, etc.)
     });
     socket.on("message", (messageData) => {
-      // If the message was sent by the current user, add a 'sent' property to it
-      // console.log("current user", currentUser);
-      // if (messageData.user === currentUser.id) {
-      //   messageData.sent = true;
-      // } else {
-      //   messageData.sent = false;
-      // }
       setChatMessages((oldMessages) => [...oldMessages, messageData]);
     });
     return () => {
@@ -124,12 +109,10 @@ function App() {
       setInRoom(true);
       socket.emit("join", roomId, currentUser.id);
     } catch (error) {
-      // console.error(error);
       setError(error.message);
       setTimeout(() => {
         setError(null);
       }, 5000);
-      // Handle the error (e.g., show a notification, update the UI, etc.)
     }
   };
   const leaveRoom = () => {
@@ -159,19 +142,14 @@ function App() {
       setRoomId(newRoomId);
       window.localStorage.setItem("roomId", newRoomId);
     } catch (error) {
-      // console.error(error);
       setError(error.message);
       setTimeout(() => {
         setError(null);
       }, 5000);
-      // Handle the error (e.g., show a notification, update the UI, etc.)
     }
   };
 
   const sendMessage = (message) => {
-    // console.log("roomid when message", roomId);
-    // console.log("current user when message", currentUser);
-
     if (socket == null && !currentUser) return;
     socket.emit(
       "message",
@@ -180,10 +158,6 @@ function App() {
       message,
       currentUser.username
     );
-    // setChatMessages((oldMessages) => [
-    //   ...oldMessages,
-    //   { user: currentUser.id, message, timestamp: Date.now(), sent: true },
-    // ]);
   };
 
   /****************************************************** */
@@ -209,19 +183,8 @@ function App() {
 
   const [currRoom, setCurrRoom] = useState();
   const [currPerson, setCurrPerson] = useState();
-  //localStorage.removeItem('currPerson'); -> run this in the console to clear local person
+
   const [showChatBox, setShowChatBox] = useState(false); // State to manage ChatBox visibility
-
-  // useEffect(() => {
-  //   const storedPerson = localStorage.getItem("currPerson");
-  //   if (storedPerson) {
-  //     const parsedPerson = JSON.parse(storedPerson);
-  //     setCurrPerson(parsedPerson);
-  //     setLoginStatus(true);
-  //   }
-  // }, []);
-
-  // console.log(currRoom, rooms);
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -272,7 +235,6 @@ function App() {
       setUsername("");
       setPassword("");
       setSignup(false);
-      // window.location.href = "/";
     } catch (error) {
       console.log(error);
       setError(error.response.data.error || "error");
