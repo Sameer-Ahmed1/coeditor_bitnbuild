@@ -25,7 +25,7 @@ function App() {
   const [loginStatus, setLoginStatus] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem("loggedPhonebookUser");
+    const loggedUserJSON = window.localStorage.getItem("loggedEditorUser");
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON);
       setCurrentUser({ username: user.username, id: user.id });
@@ -162,27 +162,10 @@ function App() {
 
   /****************************************************** */
   const [signUp, setSignup] = useState(false);
-  const [persons, setPersons] = useState([
-    { name: "shiva", password: "123", currRoomID: "" },
-  ]);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [notification, setnotification] = useState("");
   const [error, setError] = useState("");
-
-  const [rooms, setRooms] = useState([
-    {
-      id: "test123",
-      name: "test",
-      joinLink: "joinhere",
-      persons: ["shiva"],
-      owner: "shiva",
-      chat: ["hi", "hello", "howareyou", "i am fine"],
-    },
-  ]);
-
-  const [currRoom, setCurrRoom] = useState();
-  const [currPerson, setCurrPerson] = useState();
 
   const [showChatBox, setShowChatBox] = useState(false); // State to manage ChatBox visibility
 
@@ -195,7 +178,7 @@ function App() {
         password,
       });
 
-      window.localStorage.setItem("loggedPhonebookUser", JSON.stringify(user));
+      window.localStorage.setItem("loggedEditorUser", JSON.stringify(user));
 
       setUsername("");
       setPassword("");
@@ -244,7 +227,7 @@ function App() {
     }
   };
   const handleLogout = () => {
-    window.localStorage.removeItem("loggedPhonebookUser");
+    window.localStorage.removeItem("loggedEditorUser");
     window.location.reload();
   };
 

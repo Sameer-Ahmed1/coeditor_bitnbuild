@@ -3,18 +3,6 @@ import "./chatBox.css";
 
 function ChatBox({ chat, sendMessage, currentUser }) {
   const [message, setMessage] = useState("");
-  function getOrdinalSuffix(date) {
-    let day = date.getDate();
-    if (day % 10 === 1 && day !== 11) {
-      return day + "st";
-    } else if (day % 10 === 2 && day !== 12) {
-      return day + "nd";
-    } else if (day % 10 === 3 && day !== 13) {
-      return day + "rd";
-    } else {
-      return day + "th";
-    }
-  }
 
   return (
     <div className="ChatBox">
@@ -30,10 +18,7 @@ function ChatBox({ chat, sendMessage, currentUser }) {
               }
             >
               <p>{message.message}</p>
-              {/* <small>
-                {message.user === currentUser.id ? "You" : message.user} at{" "}
-                {`${getOrdinalSuffix(new Date(message.timestamp))} ${new Date(message.timestamp).toLocaleString("en-US", { month: "long", hour: "numeric", minute: "numeric", hour12: true })}`}
-              </small> */}
+
               <small>
                 {message.user === currentUser.id ? "You" : message.username}{" "}
               </small>

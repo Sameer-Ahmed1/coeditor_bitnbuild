@@ -9,7 +9,6 @@ export default function Coeditor({
   DEFAULT_CODE,
   DEFAULT_FILE_NAME,
 }) {
-  const [isReadOnly, setIsReadOnly] = useState(false);
   const [isCardVisible, setIsCardVisible] = useState(false);
   const [fileContents, setFileContents] = useState("");
 

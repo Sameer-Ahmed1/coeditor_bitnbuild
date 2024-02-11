@@ -1,7 +1,5 @@
 import React from "react";
 import "./RoomNavBar.css";
-import roomService from "../services/room";
-import userService from "../services/user";
 function RoomNavBar({
   handleLeaveRoom,
   handleLogout,
