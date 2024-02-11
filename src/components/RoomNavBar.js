@@ -9,41 +9,37 @@ function RoomNavBar({
   currUser,
   setnotification,
   showPeople,
-  setShowPeople
+  setShowPeople,
 }) {
-  const handleButtonClick = (buttonName) => {
-    console.log(buttonName);
-  };
   const fetchUsers = async () => {
     try {
       const rooms = await roomService.getRooms();
-      console.log("rooms fetched ", rooms);
-  
+
       const room = rooms.find((room) => room.roomId === roomId);
       //fetch current users
       let currentUsers = null;
       if (room) {
         currentUsers = await roomService.getOneRoom(room.id);
-        console.log("current users  ", currentUsers);
         // do something with users
       } else {
         console.log("Room not found");
       }
       let allUsers = await userService.getUsers();
       console.log("all users fetched ", allUsers);
-  
+
       // Filter out current users
-      const otherUsers = allUsers.filter(user => !currentUsers.users.some(currUser => currUser === user.id));
+      const otherUsers = allUsers.filter(
+        (user) => !currentUsers.users.some((currUser) => currUser === user.id)
+      );
       console.log("other users ", otherUsers);
-  
     } catch (err) {
       console.log(err);
       // setError
     }
   };
-  
+
   const handleShowPeople = () => {
-    setShowPeople(!showPeople)
+    setShowPeople(!showPeople);
   };
   function myFunction(roomId) {
     // Get the text field

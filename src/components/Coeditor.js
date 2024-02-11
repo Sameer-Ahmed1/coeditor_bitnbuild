@@ -27,7 +27,6 @@ export default function Coeditor({
   };
   function getLanguage(fileName) {
     const extension = fileName.split(".").pop();
-    console.log("extension", extension);
     let lang = "plaintext";
     switch (extension) {
       case "js":
@@ -54,7 +53,6 @@ export default function Coeditor({
       default:
         lang = "plaintext";
     }
-    console.log("lang", lang);
     return lang;
   }
 

@@ -59,7 +59,6 @@ function FilesTab({
     };
     // Add the new file to the list of files
     // setFiles([...files, newFile]);
-    console.log("newFile", newFile);
     setFiles((oldFiles) => ({
       ...oldFiles,
       [newFile.name]: DEFAULT_CODE,

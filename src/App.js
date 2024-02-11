@@ -12,7 +12,7 @@ import loginService from "./services/login";
 import userService from "./services/user";
 import Notification from "./components/notification";
 import ErrorMessage from "./components/errorMessage";
-import ShowPeople from "./components/ShowPeople"
+import ShowPeople from "./components/ShowPeople";
 import "./App.css";
 import roomService from "./services/room";
 const ENDPOINT =
@@ -58,7 +58,6 @@ function App() {
   useEffect(() => {
     const newSocket = socketIOClient(ENDPOINT);
     setSocket(newSocket);
-    console.log("socket io connected");
     return () => {
       newSocket.disconnect();
     };
@@ -67,7 +66,6 @@ function App() {
     if (socket == null) return;
 
     socket.on("code", ({ fileName, newCode }) => {
-      console.log("code recieved  from there", fileName, newCode);
       setFiles((oldFiles) => ({
         ...oldFiles,
         [fileName]: newCode,
@@ -85,7 +83,6 @@ function App() {
     });
     socket.on("message", (messageData) => {
       // If the message was sent by the current user, add a 'sent' property to it
-      console.log("message recieved ", messageData);
       // console.log("current user", currentUser);
       // if (messageData.user === currentUser.id) {
       //   messageData.sent = true;
@@ -237,7 +234,6 @@ function App() {
 
       window.localStorage.setItem("loggedPhonebookUser", JSON.stringify(user));
 
-      console.log("user", user);
       setUsername("");
       setPassword("");
       setLoginStatus(true);
@@ -290,7 +286,7 @@ function App() {
     window.location.reload();
   };
 
-  const [showPeople,setShowPeople] = useState(false);
+  const [showPeople, setShowPeople] = useState(false);
 
   return (
     <div className="App">
